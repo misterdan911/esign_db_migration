@@ -1,0 +1,14 @@
+
+{
+    "nama_tabel": "ref_komisaris_vendor",
+    "pk": "kode_komis_v",
+    "field": [
+        {"urut": 0, "label": "Kode Komisaris", "name": "kode_komis_v", "type": "text"},
+        {"urut": 1, "label": "nama", "name": "nama", "type": "text"},
+        {"urut": 2, "label": "Jabatan", "name": "jabatan", "type": "textarea"},
+        {"urut": 3, "label": "No. Telepon", "name": "no_telepon", "type": "text"},
+        {"urut": 4, "label": "NIK", "name": "nik", "type": "text"},
+        {"urut": 5, "label": "Scan KTP", "name": "scan_ktp", "type": "file"}
+    ]
+}
+  
