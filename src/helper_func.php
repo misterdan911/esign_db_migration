@@ -3,6 +3,7 @@
 function prepareString($db, $string)
 {
     if (empty($string)) return 'NULL';
+    if ($string == 'NULL')  return 'NULL';
 
     // trim left & right
     $string = trim($string);
@@ -13,6 +14,11 @@ function prepareString($db, $string)
     $string = $db->escape_string($string);
 
     return "'$string'";
+}
+
+function prepareInteger($integer) {
+    if (empty($integer)) return 'NULL';
+    return $integer;
 }
 
 function parseDateTime($dateTime)
