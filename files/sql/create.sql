@@ -25,12 +25,20 @@ CREATE TABLE "ref_penandatangan" (
   "status_permohonan" status_permohonan,
   "alasan_ditolak" text,
   "user_verif" varchar,
-  "pin" int4,
+  "pin" varchar,
   "tte" varchar,
   "reset_token" varchar,
   "token_expired_time" timestamptz,
   "udcr" timestamptz,
   "udch" timestamptz
+);
+
+CREATE TABLE "trx_otp" (
+  "kode_otp" serial PRIMARY KEY,
+  "kode_penandatangan" int4,
+  "otp" int4,
+  "expired_time" timestamptz,
+  "udcr" timestamptz
 );
 
 CREATE TABLE "trx_tte" (
@@ -39,14 +47,6 @@ CREATE TABLE "trx_tte" (
   "tte" varchar,
   "barcode" varchar,
   "dok" varchar,
-  "udcr" timestamptz
-);
-
-CREATE TABLE "trx_tte_otp" (
-  "kode_tte_otp" serial PRIMARY KEY,
-  "kode_tte" int4,
-  "otp" int4,
-  "expired_time" timestamptz,
   "udcr" timestamptz
 );
 
