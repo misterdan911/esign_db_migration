@@ -11,11 +11,12 @@ define('BASE_PATH', getcwd());
 
 require_once(BASE_PATH . '/config.php');
 require_once(BASE_PATH . '/src/Log.php');
-require_once(BASE_PATH . '/src/DB_OLD_PG.php');
-require_once(BASE_PATH . '/src/DB_NEW.php');
-// require_once(BASE_PATH . '/src/Request.php');
+require_once(BASE_PATH . '/src/DB_ESIGN.php');
+require_once(BASE_PATH . '/src/DB_PROMISE_ESIGN.php');
+require_once(BASE_PATH . '/src/DB_PROMISE_SIPLANG.php');
 require_once(BASE_PATH . '/src/Encoding.php');
 
-$GLOBALS['db_old'] = new DB_OLD();
-$GLOBALS['db_new'] = new DB_NEW();
+$GLOBALS['db_esign'] = new DB_ESIGN();
+$GLOBALS['db_promise_esign'] = new DB_PROMISE_ESIGN();
+$GLOBALS['db_promise_siplang'] = new DB_PROMISE_SIPLANG();
 

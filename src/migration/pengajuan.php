@@ -2,7 +2,7 @@
 
 // Truncate
 $qRefPenandatangan = "TRUNCATE TABLE ref_penandatangan RESTART IDENTITY CASCADE";
-$dbNew->query($qRefPenandatangan);
+$dbEsign->query($qRefPenandatangan);
 echo $qRefPenandatangan . PHP_EOL;
 
 $kelompok = [
@@ -14,9 +14,9 @@ $kelompok = [
 ];
 
 $qPengajuan = "SELECT * FROM pengajuan ORDER BY id_pengajuan ASC";
-$resPengajuan = $dbOld->query($qPengajuan);
+$resPengajuan = $dbProEsign->query($qPengajuan);
 
-while ($objPengajuan = $dbOld->fetch_object($resPengajuan))
+while ($objPengajuan = $dbProEsign->fetch_object($resPengajuan))
 {
     $kode_penandatangan = $objPengajuan->id_pengajuan;
     $kode_kelompok_penandatangan = $kelompok[$objPengajuan->jenis];
@@ -31,19 +31,19 @@ while ($objPengajuan = $dbOld->fetch_object($resPengajuan))
     if ($objPengajuan->jenis == 'pegawai') $isPegawai = true;
 
     if ($isPegawai) {
-      $nik_pegawai = prepareString($dbOld, $objPengajuan->nik);
+      $nik_pegawai = prepareString($dbProEsign, $objPengajuan->nik);
       $qPegawai = "SELECT * FROM pegawai WHERE nik_pegawai = $nik_pegawai";
-      $resPegawai = $dbOld->query($qPegawai);
-      $objPegawai = $dbOld->fetch_object($resPegawai);
+      $resPegawai = $dbProEsign->query($qPegawai);
+      $objPegawai = $dbProEsign->fetch_object($resPegawai);
 
       // kalau di tabel promise_esign.pegawai datanya tidak ada, loopnya di skip aja
       if ($objPegawai == false) continue;
     }
     else {
-      $nik_penyedia = prepareString($dbOld, $objPengajuan->nik);
+      $nik_penyedia = prepareString($dbProEsign, $objPengajuan->nik);
       $qPenyedia = "SELECT * FROM penyedia WHERE nik_penyedia = $nik_penyedia";
-      $resPenyedia = $dbOld->query($qPenyedia);
-      $objPenyedia = $dbOld->fetch_object($resPenyedia);
+      $resPenyedia = $dbProEsign->query($qPenyedia);
+      $objPenyedia = $dbProEsign->fetch_object($resPenyedia);
 
       // kalau di tabel promise_esign.vendor datanya tidak ada, loopnya di skip aja
       if ($objPenyedia == false) continue;
@@ -93,22 +93,22 @@ while ($objPengajuan = $dbOld->fetch_object($resPengajuan))
 
     // prepare string
     $kode_direksi_perus = prepareInteger($kode_direksi_perus);
-    $nama = prepareString($dbNew, $nama);
-    $email = prepareString($dbNew, $email);
-    $no_hp = prepareString($dbNew, $no_hp);
-    $nip = prepareString($dbNew, $nip);
-    $nik = prepareString($dbNew, $nik);
-    $scan_ktp = prepareString($dbNew, $scan_ktp);
-    $jabatan_direksi = prepareString($dbNew, $jabatan_direksi);
-    $status_permohonan = prepareString($dbNew, $status_permohonan);
-    $alasan_ditolak = prepareString($dbNew, $alasan_ditolak);
-    $user_verif = prepareString($dbNew, $user_verif);
-    $pin = prepareString($dbNew, $pin);
-    $tte = prepareString($dbNew, $tte);
-    $reset_token = prepareString($dbNew, $reset_token);
-    $token_expired_time = prepareString($dbNew, $token_expired_time);
-    $udcr = prepareString($dbNew, $udcr);
-    $udch = prepareString($dbNew, $udch);
+    $nama = prepareString($dbEsign, $nama);
+    $email = prepareString($dbEsign, $email);
+    $no_hp = prepareString($dbEsign, $no_hp);
+    $nip = prepareString($dbEsign, $nip);
+    $nik = prepareString($dbEsign, $nik);
+    $scan_ktp = prepareString($dbEsign, $scan_ktp);
+    $jabatan_direksi = prepareString($dbEsign, $jabatan_direksi);
+    $status_permohonan = prepareString($dbEsign, $status_permohonan);
+    $alasan_ditolak = prepareString($dbEsign, $alasan_ditolak);
+    $user_verif = prepareString($dbEsign, $user_verif);
+    $pin = prepareString($dbEsign, $pin);
+    $tte = prepareString($dbEsign, $tte);
+    $reset_token = prepareString($dbEsign, $reset_token);
+    $token_expired_time = prepareString($dbEsign, $token_expired_time);
+    $udcr = prepareString($dbEsign, $udcr);
+    $udch = prepareString($dbEsign, $udch);
 
 
     // kasus khusus
@@ -143,7 +143,7 @@ while ($objPengajuan = $dbOld->fetch_object($resPengajuan))
       $udch
     )";
 
-    $dbNew->query($qRefPenandatangan);
+    $dbEsign->query($qRefPenandatangan);
 
     echo 'nama: ' . $nama . PHP_EOL;
 }
