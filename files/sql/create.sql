@@ -44,6 +44,8 @@ CREATE TABLE "trx_otp" (
 CREATE TABLE "trx_tte" (
   "kode_tte" serial PRIMARY KEY,
   "kode_penandatangan" int4,
+  "kode_otp" int4,
+  "jenis_signature" varchar,
   "tte" varchar,
   "barcode" varchar,
   "dok" varchar,
