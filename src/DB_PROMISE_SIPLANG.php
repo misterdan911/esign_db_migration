@@ -12,7 +12,7 @@ class DB_PROMISE_SIPLANG
         $host = DB_HOST;
         $user = DB_USERNAME;
         $password = DB_PASSWORD;
-        $dbname = DB_DATABASE_ESIGN;
+        $dbname = DB_DATABASE_PROMISE_SIPLANG;
         $port = DB_PORT;
 
         $db = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");

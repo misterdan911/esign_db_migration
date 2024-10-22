@@ -11,5 +11,5 @@ $dbProSiplang = $GLOBALS['db_promise_siplang'];
 include('src/helper_func.php');
 
 // include('src/migration/pengajuan.php');
-include('src/migration/tbl_signature.php');
+include('src/migration/tbl_signature_siplang.php');
 // include('src/migration/tbl_signature_otp.php');
