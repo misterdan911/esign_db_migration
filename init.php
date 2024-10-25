@@ -14,9 +14,11 @@ require_once(BASE_PATH . '/src/Log.php');
 require_once(BASE_PATH . '/src/DB_ESIGN.php');
 require_once(BASE_PATH . '/src/DB_PROMISE_ESIGN.php');
 require_once(BASE_PATH . '/src/DB_PROMISE_SIPLANG.php');
+require_once(BASE_PATH . '/src/DB_VMS.php');
 require_once(BASE_PATH . '/src/Encoding.php');
 
 $GLOBALS['db_esign'] = new DB_ESIGN();
 $GLOBALS['db_promise_esign'] = new DB_PROMISE_ESIGN();
 $GLOBALS['db_promise_siplang'] = new DB_PROMISE_SIPLANG();
+$GLOBALS['db_vms'] = new DB_VMS();
 

@@ -8,6 +8,7 @@
 
 define('DB_HOST', 'localhost');
 define('DB_PORT', '5432');
+define('DB_DATABASE_VMS', 'vms_db');
 define('DB_DATABASE_PROMISE_SIPLANG', 'promise_siplang');
 define('DB_DATABASE_PROMISE_ESIGN', 'promise_esign');
 define('DB_DATABASE_ESIGN', 'db_esign');
