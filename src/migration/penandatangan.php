@@ -165,7 +165,7 @@ while ($objPenyedia = $dbProEsign->fetch_object($resPenyedia))
 }
 
 echo "Migrasi tabel penyedia... SELESAI" . PHP_EOL;
-// migrasi tabel pegawai ke ref_penandatangan   ---   END
+// migrasi tabel penyedia ke ref_penandatangan   ---   END
 
 
 
