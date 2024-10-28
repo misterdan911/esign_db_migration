@@ -11,8 +11,7 @@ $dbVms = $GLOBALS['db_vms'];
 
 include('src/helper_func.php');
 
-// include('src/migration/penandatangan.php');
-
+include('src/migration/penandatangan.php');
 
 // -------------------------------------------------------------
 $qTrxOtp = "TRUNCATE TABLE trx_otp RESTART IDENTITY CASCADE";

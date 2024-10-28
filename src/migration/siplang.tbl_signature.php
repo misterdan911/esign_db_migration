@@ -18,19 +18,23 @@ echo $qTrxTte . PHP_EOL;
 
 
 
-$qTblSignature = "
-SELECT
+/* 
+
     id_profil_penyedia,
     id_direksi_perus,
     id_user,
-    ts.id_signature_otp,
+    id_signature_otp,
     jenis_signature,
     tte,
     hash_final_barcode,
     hash_final_dok,
     created_at
-FROM tbl_signature ts
-LEFT JOIN tbl_signature_otp tso ON tso.id_signature_otp = ts.id_signature_otp
+
+ */
+
+$qTblSignature = "
+SELECT *
+FROM tbl_signature
 ORDER BY id_signature ASC";
 
 $resTblSignature = $dbProSiplang->query($qTblSignature);
@@ -45,16 +49,16 @@ while ($objTblSignature = $dbProSiplang->fetch_object($resTblSignature))
     // kalau id_profil_penyedia & id_direksi_perus kosong berati dia adalah pegawai
     if (empty($objTblSignature->id_profil_penyedia) && empty($objTblSignature->id_direksi_perus))
     {
-        $qUser = "SELECT email FROM users WHERE id = $objTblSignature->id_user";
+        $qUser = "SELECT email, email_real FROM users WHERE id = $objTblSignature->id_user";
         // echo $qUser . PHP_EOL;
         $resUser = $dbVms->query($qUser);
         $objUser = $dbVms->fetch_object($resUser);
 
         if (!empty($objUser)) {
-            $email = $objUser->email;
+            $email = $objUser->email_real;
         }
         else {
-            // Kalo user gak ketemu gimana HAyoooo ????
+            // Kalo user gak ketemu gimana ????
         }
         
         $qPenandatangan = "select kode_penandatangan from ref_penandatangan where email = '$email'";
@@ -69,7 +73,24 @@ while ($objTblSignature = $dbProSiplang->fetch_object($resTblSignature))
     }
     elseif (!empty($objTblSignature->id_direksi_perus)) {
         // Udah pasti Penyedia
-        
+        $kodeDireksiPerus = $objTblSignature->id_direksi_perus;
+        $kodeVendor = $objTblSignature->id_profil_penyedia;
+
+        $qPenandatangan = "select kode_penandatangan from ref_penandatangan where kode_direksi_perus = $kodeDireksiPerus AND kode_vendor = $kodeVendor";
+
+        // if ($kodeDireksiPerus == 1252) {
+        //     echo "qPenandatangan: " . $qPenandatangan . PHP_EOL;
+        // }
+
+        $rsPenandatangan = $dbEsign->query($qPenandatangan);
+        $objPenandatangan = $dbEsign->fetch_object($rsPenandatangan);
+
+        if (!empty($objPenandatangan)) {
+            $kode_penandatangan = $objPenandatangan->kode_penandatangan;
+        } else {
+            // kalo datanya gak ketemu gimana ???
+        }
+
     }
 
     // buat dapetin $kode_penandatangan -- end

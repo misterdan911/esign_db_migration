@@ -97,12 +97,20 @@ $arrPenyedia = [];
 
 while ($objPenyedia = $dbProEsign->fetch_object($resPenyedia))
 {
-    // kalau NIK dan email nya sama dengan data sebelumnya, terindikasi data dobel, maka tidak di insert ke tabel ref_penandatangan
-    $arrKey = $objPenyedia->email_penyedia .'_'. $objPenyedia->nik_penyedia;
+    // if ($objPenyedia->id_direksi_perus == 1268) {
+    //     echo "id_direksi_perus: " . $objPenyedia->id_direksi_perus . PHP_EOL;
+    // }
+
+    // kalau id_direksi_perus, email dan NIK nya sama dengan data sebelumnya, terindikasi data dobel, maka tidak di insert ke tabel ref_penandatangan
+    $arrKey = $objPenyedia->id_direksi_perus .'_'.$objPenyedia->email_penyedia .'_'. $objPenyedia->nik_penyedia;
     if (isset($arrPenyedia[$arrKey])) {
         continue;
     }
 
+    // if ($objPenyedia->id_direksi_perus == 1268) {
+    //     echo "id_direksi_perus: " . $objPenyedia->id_direksi_perus . PHP_EOL;
+    // }
+    
     // Dapatkan kode_kelompok_penandatangan -- START
     $emailPengajuan = $dbProEsign->escape_string($objPenyedia->email_penyedia);
     $nikPengajuan = $dbProEsign->escape_string($objPenyedia->nik_penyedia);
