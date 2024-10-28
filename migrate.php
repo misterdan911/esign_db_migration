@@ -11,8 +11,9 @@ $dbVms = $GLOBALS['db_vms'];
 
 include('src/helper_func.php');
 
-include('src/migration/pengajuan.php');
+include('src/migration/penandatangan.php');
 
+/*
 // -------------------------------------------------------------
 $qTrxOtp = "TRUNCATE TABLE trx_otp RESTART IDENTITY CASCADE";
 $dbEsign->query($qTrxOtp);
@@ -25,3 +26,4 @@ $dbEsign->query($qTrxOtp);
 
 include('src/migration/tbl_signature_siplang.php');
 // include('src/migration/tbl_signature_otp.php');
+*/
