@@ -18,7 +18,7 @@ $qPegawai = "SELECT * FROM pegawai ORDER BY id_pegawai ASC";
 $resPegawai = $dbProEsign->query($qPegawai);
 $objData = new stdClass();
 
-echo "Migrasi tabel pegawai..." . PHP_EOL;
+echo "Migrasi tabel promise_esign.pegawai..." . PHP_EOL;
 
 $arrPegawai = [];
 
@@ -80,7 +80,7 @@ while ($objPegawai = $dbProEsign->fetch_object($resPegawai))
     $arrPegawai[$arrKey] = 1;
 }
 
-echo "Migrasi tabel pegawai... SELESAI" . PHP_EOL;
+echo "Migrasi tabel promise_esign.pegawai... SELESAI" . PHP_EOL;
 // migrasi tabel pegawai ke ref_penandatangan   ---   END
 
 
@@ -91,7 +91,7 @@ $qPenyedia = "SELECT * FROM penyedia ORDER BY id_penyedia ASC";
 $resPenyedia = $dbProEsign->query($qPenyedia);
 $objData = new stdClass();
 
-echo "Migrasi tabel penyedia..." . PHP_EOL;
+echo "Migrasi tabel promise_esign.penyedia..." . PHP_EOL;
 
 $arrPenyedia = [];
 
@@ -164,7 +164,7 @@ while ($objPenyedia = $dbProEsign->fetch_object($resPenyedia))
     $arrPenyedia[$arrKey] = 1;
 }
 
-echo "Migrasi tabel penyedia... SELESAI" . PHP_EOL;
+echo "Migrasi tabel promise_esign.penyedia... SELESAI" . PHP_EOL;
 // migrasi tabel penyedia ke ref_penandatangan   ---   END
 
 
