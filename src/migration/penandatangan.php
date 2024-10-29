@@ -102,10 +102,10 @@ while ($objPenyedia = $dbProEsign->fetch_object($resPenyedia))
     // }
 
     // kalau id_direksi_perus, email dan NIK nya sama dengan data sebelumnya, terindikasi data dobel, maka tidak di insert ke tabel ref_penandatangan
-    $arrKey = $objPenyedia->id_direksi_perus .'_'.$objPenyedia->email_penyedia .'_'. $objPenyedia->nik_penyedia;
-    if (isset($arrPenyedia[$arrKey])) {
-        continue;
-    }
+    // $arrKey = $objPenyedia->id_direksi_perus .'_'.$objPenyedia->email_penyedia .'_'. $objPenyedia->nik_penyedia;
+    // if (isset($arrPenyedia[$arrKey])) {
+    //     continue;
+    // }
 
     // if ($objPenyedia->id_direksi_perus == 1268) {
     //     echo "id_direksi_perus: " . $objPenyedia->id_direksi_perus . PHP_EOL;
@@ -168,8 +168,8 @@ while ($objPenyedia = $dbProEsign->fetch_object($resPenyedia))
 
     insertToRefPenandatangan($objData);
 
-    $arrKey = $objPenyedia->email_penyedia .'_'. $objPenyedia->nik_penyedia;
-    $arrPenyedia[$arrKey] = 1;
+    // $arrKey = $objPenyedia->email_penyedia .'_'. $objPenyedia->nik_penyedia;
+    // $arrPenyedia[$arrKey] = 1;
 }
 
 echo "Migrasi tabel promise_esign.penyedia... SELESAI" . PHP_EOL;

@@ -6,37 +6,7 @@ $dbEsign->query($qTrxTte);
 echo $qTrxTte . PHP_EOL;
 
 
-// Populate data ref_penandatangan to array
-// $qRefPenandatangan = "SELECT * FROM ref_penandatangan ORDER BY kode_penandatangan ASC";
-// $resRefPenandatangan = $dbEsign->query($qRefPenandatangan);
-// $arrData = [][];
-// while ($objRefPenandatangan= $dbEsign->fetch_object($resRefPenandatangan))
-// {
-// 	$idUser = $objRefPenandatangan->
-// 	$arrData[]
-// }
-
-
-
-/* 
-
-    id_profil_penyedia,
-    id_direksi_perus,
-    id_user,
-    id_signature_otp,
-    jenis_signature,
-    tte,
-    hash_final_barcode,
-    hash_final_dok,
-    created_at
-
- */
-
-$qTblSignature = "
-SELECT *
-FROM tbl_signature
-ORDER BY id_signature ASC";
-
+$qTblSignature = "SELECT * FROM tbl_signatureORDER BY id_signature ASC";
 $resTblSignature = $dbProSiplang->query($qTblSignature);
 
 echo "Migrasi tabel promise_siplang.tbl_signature..." . PHP_EOL;
@@ -71,16 +41,13 @@ while ($objTblSignature = $dbProSiplang->fetch_object($resTblSignature))
             // kalo datanya gak ketemu gimana Hayoooo
         }
     }
-    elseif (!empty($objTblSignature->id_direksi_perus)) {
+    elseif (!empty($objTblSignature->id_direksi_perus))
+    {
         // Udah pasti Penyedia
         $kodeDireksiPerus = $objTblSignature->id_direksi_perus;
         $kodeVendor = $objTblSignature->id_profil_penyedia;
 
-        $qPenandatangan = "select kode_penandatangan from ref_penandatangan where kode_direksi_perus = $kodeDireksiPerus AND kode_vendor = $kodeVendor";
-
-        // if ($kodeDireksiPerus == 1252) {
-        //     echo "qPenandatangan: " . $qPenandatangan . PHP_EOL;
-        // }
+        $qPenandatangan = "SELECT kode_penandatangan FROM ref_penandatangan WHERE kode_direksi_perus = $kodeDireksiPerus AND kode_vendor = $kodeVendor";
 
         $rsPenandatangan = $dbEsign->query($qPenandatangan);
         $objPenandatangan = $dbEsign->fetch_object($rsPenandatangan);
@@ -90,7 +57,21 @@ while ($objTblSignature = $dbProSiplang->fetch_object($resTblSignature))
         } else {
             // kalo datanya gak ketemu gimana ???
         }
+    }
+    elseif(!empty($objTblSignature->id_profil_penyedia))
+    {
+        // Berarti penyedia perorangan
+        $kodeVendor = $objTblSignature->id_profil_penyedia;
+        $qPenandatangan = "SELECT kode_penandatangan FROM ref_penandatangan WHERE kode_vendor = $kodeVendor AND kode_direksi_perus IS NULL";
 
+        $rsPenandatangan = $dbEsign->query($qPenandatangan);
+        $objPenandatangan = $dbEsign->fetch_object($rsPenandatangan);
+
+        if (!empty($objPenandatangan)) {
+            $kode_penandatangan = $objPenandatangan->kode_penandatangan;
+        } else {
+            // kalo datanya gak ketemu gimana ???
+        }        
     }
 
     // buat dapetin $kode_penandatangan -- end
