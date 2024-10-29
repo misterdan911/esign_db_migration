@@ -19,6 +19,13 @@ while($objLogPengajuan = $dbProEsign->fetch_object($resLogPengajuan))
     $udcr = $objLogPengajuan->created_at;
     $udch = $objLogPengajuan->updated_at;
 
+    $table_log = prepareString($dbEsign, $table_log);
+    $crud_log = prepareString($dbEsign, $crud_log);
+    $desc_log = prepareString($dbEsign, $desc_log);
+    $udcr = prepareString($dbEsign, $udcr);
+    $udch = prepareString($dbEsign, $udch);
+
+
     $qInsertLog = "INSERT INTO log_pengajuan (kode_log_pengajuan, table_log, crud_log, desc_log, udcr, udch)
     VALUES (
         $kode_log_pengajuan,
@@ -29,9 +36,11 @@ while($objLogPengajuan = $dbProEsign->fetch_object($resLogPengajuan))
         $udch
     )";
 
-    $dbEsign->query($qRefPenandatangan);
+    $dbEsign->query($qInsertLog);
 }
 
-// TODO: update Sequence
+// update Sequence
+$qSequence = "SELECT setval('log_pengajuan_kode_log_pengajuan_seq', (SELECT MAX(kode_log_pengajuan) FROM log_pengajuan))";
+$dbEsign->query($qSequence);
 
 echo 'Migrating log_pengajuan... SELESAI' . PHP_EOL;

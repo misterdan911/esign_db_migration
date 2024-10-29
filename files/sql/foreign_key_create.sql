@@ -1,3 +1,5 @@
+ALTER TABLE "trx_tte" ADD FOREIGN KEY ("kode_trx_otp") REFERENCES "trx_otp" ("kode_trx_otp");
+
 ALTER TABLE "ref_penandatangan" ADD FOREIGN KEY ("kode_kelompok_penandatangan") REFERENCES "ref_kelompok_penandatangan" ("kode_kelompok_penandatangan");
 
 ALTER TABLE "trx_tte" ADD FOREIGN KEY ("kode_penandatangan") REFERENCES "ref_penandatangan" ("kode_penandatangan");

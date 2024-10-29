@@ -1,6 +1,7 @@
 CREATE TYPE "status_permohonan" AS ENUM (
   'baru',
   'revisi',
+  'proses',
   'terima',
   'tolak'
 );
@@ -34,7 +35,7 @@ CREATE TABLE "ref_penandatangan" (
 );
 
 CREATE TABLE "trx_otp" (
-  "kode_otp" serial PRIMARY KEY,
+  "kode_trx_otp" serial PRIMARY KEY,
   "kode_penandatangan" int4,
   "otp" int4,
   "expired_time" timestamptz,
@@ -44,7 +45,7 @@ CREATE TABLE "trx_otp" (
 CREATE TABLE "trx_tte" (
   "kode_tte" serial PRIMARY KEY,
   "kode_penandatangan" int4,
-  "kode_otp" int4,
+  "kode_trx_otp" int4,
   "jenis_signature" varchar,
   "tte" varchar,
   "barcode" varchar,
@@ -52,11 +53,43 @@ CREATE TABLE "trx_tte" (
   "udcr" timestamptz
 );
 
-CREATE TABLE "trx_log_aktifitas_user" (
-  "kode_log_aktifitas_user" serial PRIMARY KEY,
-  "email" text,
-  "aktifitas" text,
-  "udcr" timestamptz
+CREATE TABLE "log_pengajuan" (
+  "kode_log_pengajuan" serial PRIMARY KEY,
+  "table_log" varchar,
+  "crud_log" varchar,
+  "desc_log" text,
+  "udcr" timestamptz,
+  "udch" timestamptz
+);
+
+CREATE TABLE "log_pegawai" (
+  "kode_log_pegawai" serial PRIMARY KEY,
+  "table_log_pegawai" varchar,
+  "crud_log_pegawai" varchar,
+  "desc_log_pegawai" text,
+  "udcr" timestamptz,
+  "udch" timestamptz
+);
+
+CREATE TABLE "log_penyedia" (
+  "kode_log_penyedia" serial PRIMARY KEY,
+  "table_log_penyedia" varchar,
+  "crud_log_penyedia" varchar,
+  "dpt_log_penyedia" varchar,
+  "tipe_log_penyedia" varchar,
+  "desc_log_penyedia" text,
+  "udcr" timestamptz,
+  "udch" timestamptz
+);
+
+CREATE TABLE "log_history_pin" (
+  "kode_log_history_pin" serial PRIMARY KEY,
+  "kode_penandatangan" int4,
+  "pin_lama" varchar(6) NOT NULL,
+  "pin_baru" varchar(6) NOT NULL,
+  "hash_pin_lama" varchar(255) NOT NULL,
+  "hash_pin_baru" varchar(255) NOT NULL,
+  "udcr" timestamptz(6)
 );
 
 COMMENT ON COLUMN "ref_penandatangan"."no_hp" IS 'Nomor Handphone yg tekonensi ke Whatsapp';

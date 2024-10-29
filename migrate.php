@@ -12,7 +12,6 @@ $dbVms = $GLOBALS['db_vms'];
 
 include('src/helper_func.php');
 
-/*
 include('src/migration/penandatangan.php');
 
 // -------------------------------------------------------------
@@ -26,8 +25,8 @@ $dbEsign->query($qTrxOtp);
 // -------------------------------------------------------------
 
 include('src/migration/siplang.tbl_signature.php');
-*/
 // include('src/migration/sibela.tbl_signature.php');
 
 include('src/migration/log_pengajuan.php');
+include('src/migration/log_pegawai.php');
 

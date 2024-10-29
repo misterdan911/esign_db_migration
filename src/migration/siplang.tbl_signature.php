@@ -6,7 +6,7 @@ $dbEsign->query($qTrxTte);
 echo $qTrxTte . PHP_EOL;
 
 
-$qTblSignature = "SELECT * FROM tbl_signatureORDER BY id_signature ASC";
+$qTblSignature = "SELECT * FROM tbl_signature ORDER BY id_signature ASC";
 $resTblSignature = $dbProSiplang->query($qTblSignature);
 
 echo "Migrasi tabel promise_siplang.tbl_signature..." . PHP_EOL;
