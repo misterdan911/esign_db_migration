@@ -1,6 +1,6 @@
 <?php
 
-class DB_PROMISE_SIBELA
+class DB_PROMISE_SIBELA extends DB_PG
 {
 
     public $db;
@@ -30,6 +30,7 @@ class DB_PROMISE_SIBELA
         $this->db = $db;
     }
 
+    /*
     public function query($q)
     {
         $res = pg_query($this->db, $q);
@@ -52,4 +53,5 @@ class DB_PROMISE_SIBELA
         if (empty($string)) return null;
         return pg_escape_string($this->db, $string);
     }
+    */
 }

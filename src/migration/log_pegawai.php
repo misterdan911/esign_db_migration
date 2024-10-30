@@ -44,3 +44,4 @@ $qSequence = "SELECT setval('log_pegawai_kode_log_pegawai_seq', (SELECT MAX(kode
 $dbEsign->query($qSequence);
 
 echo 'Migrating log_pegawai... SELESAI' . PHP_EOL;
+    
