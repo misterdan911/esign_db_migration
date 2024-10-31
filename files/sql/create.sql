@@ -92,6 +92,22 @@ CREATE TABLE "log_history_pin" (
   "udcr" timestamptz(6)
 );
 
+CREATE TABLE "log_history" (
+  "id_log_history" serial PRIMARY KEY,
+  "kode_tte" int4,
+  "modul_promise" varchar(30),
+  "hash_id_user" varchar,
+  "hash_tte" varchar,
+  "hash_id_signature" varchar,
+  "hash_waktu" varchar,
+  "hash_final_barcode" varchar,
+  "hash_final_dok" varchar,
+  "path_final_barcode" text,
+  "path_final_dok" text,
+  "base64_dok" text,
+  "udcr" timestamptz
+);
+
 COMMENT ON COLUMN "ref_penandatangan"."no_hp" IS 'Nomor Handphone yg tekonensi ke Whatsapp';
 
 COMMENT ON COLUMN "ref_penandatangan"."nip" IS 'Nomor Induk Pegawai - diisi Kalau pemohonya pegawai internal';

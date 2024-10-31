@@ -110,9 +110,66 @@ while ($objTblSignature = $dbProSiplang->fetch_object($resTblSignature))
         $barcode,
         $dok,
         $udcr
-    )";
+    ) RETURNING kode_tte";
 
-    $dbEsign->query($qTrxTte);
+    $resInsert = $dbEsign->query($qTrxTte);
+    $rowInsert = pg_fetch_row($resInsert);
+    $kode_tte = $rowInsert['0'];
+
+    // Isi tabel log_history -- START
+    if (!empty($kode_penandatangan)) {
+        $qLogHistory = "SELECT * FROM log_history WHERE id_signature = $objTblSignature->id_signature AND modul_promise = 'siplang'";
+        // echo $qLogHistory . PHP_EOL;
+        $resLogHistory = $dbProEsign->query($qLogHistory);
+        $objLogHistory = $dbProEsign->fetch_object($resLogHistory);
+
+        if (!empty($objLogHistory))
+        {
+            $modul_promise = $objLogHistory->modul_promise;
+            $hash_id_user = $objLogHistory->hash_id_user;
+            $hash_tte = $objLogHistory->hash_tte;
+            $hash_id_signature = $objLogHistory->hash_id_signature;
+            $hash_waktu = $objLogHistory->hash_waktu;
+            $hash_final_barcode = $objLogHistory->hash_final_barcode;
+            $hash_final_dok = $objLogHistory->hash_final_dok;
+            $path_final_barcode = $objLogHistory->path_final_barcode;
+            $path_final_dok = $objLogHistory->path_final_dok;
+            $base64_dok = $objLogHistory->base64_dok;
+            $udcr = $objLogHistory->created_at;
+
+            $modul_promise = prepareString($dbEsign, $modul_promise);
+            $hash_id_user = prepareString($dbEsign, $hash_id_user);
+            $hash_tte = prepareString($dbEsign, $hash_tte);
+            $hash_id_signature = prepareString($dbEsign, $hash_id_signature);
+            $hash_waktu = prepareString($dbEsign, $hash_waktu);
+            $hash_final_barcode = prepareString($dbEsign, $hash_final_barcode);
+            $hash_final_dok = prepareString($dbEsign, $hash_final_dok);
+            $path_final_barcode = prepareString($dbEsign, $path_final_barcode);
+            $path_final_dok = prepareString($dbEsign, $path_final_dok);
+            $base64_dok = prepareString($dbEsign, $base64_dok);
+            $udcr = prepareString($dbEsign, $udcr);
+
+            $qInsertLog = "INSERT INTO log_history (kode_tte, modul_promise, hash_id_user, hash_tte, hash_id_signature, hash_waktu, hash_final_barcode, hash_final_dok, path_final_barcode, path_final_dok, base64_dok, udcr)
+            VALUES (
+                $kode_tte,
+                $modul_promise,
+                $hash_id_user,
+                $hash_tte,
+                $hash_id_signature,
+                $hash_waktu,
+                $hash_final_barcode,
+                $hash_final_dok,
+                $path_final_barcode,
+                $path_final_dok,
+                $base64_dok,
+                $udcr
+            )";
+        
+            $dbEsign->query($qInsertLog);
+        }
+    }
+    // Isi tabel log_history -- END
+
 
     // echo 'tte: ' . $tte . PHP_EOL;
     // die('Dieeeeeee');
